@@ -17,11 +17,11 @@ DegenToken is a decentralized ERC20 token with additional functionality for feat
    - Features are represented as a struct containing a name and price.
    - A mapping is used to store available features with their unique IDs.
 
-4. **Feature Purchases**:
-   - Users can buy features using their DegenTokens.
-   - The `buyFeature` function checks if the feature exists, if the user has already purchased it, and if the user has sufficient balance.
+4. **Feature Redeem**:
+   - Users can redeem features using their DegenTokens.
+   - The `redeemFeature` function checks if the feature exists, if the user has already purchased it, and if the user has sufficient balance.
    - Upon successful purchase, tokens are transferred from the user to the contract, and the feature is marked as purchased for the user.
-   - An event `FeaturePurchased` is emitted upon successful purchase.
+   - An event `FeatureRedeemed` is emitted upon successful purchase.
 
 5. **Ownership**:
    - The contract uses OpenZeppelin's `Ownable` contract to restrict certain functions to the contract owner.
@@ -38,7 +38,7 @@ DegenToken is a decentralized ERC20 token with additional functionality for feat
 - **constructor**: Initializes the token with the name "Degen" and the symbol "DGN".
 - **mint**: Allows the contract owner to mint new tokens to a specified address.
 - **addFeature**: Allows the contract owner to add a new feature with a specified ID, name, and price.
-- **buyFeature**: Allows users to purchase a feature using their tokens.
+- **redeemFeature**: Allows users to purchase a feature using their tokens.
 - **hasPurchasedFeature**: Checks if a user has purchased a specific feature.
 
 ### Mappings
@@ -48,6 +48,9 @@ DegenToken is a decentralized ERC20 token with additional functionality for feat
 - **userFeatures**:
   - Nested mapping to track which features a user has purchased.
   - Maps a user's address to another mapping that associates feature IDs with a boolean indicating purchase status.
+- **featureNames**:
+  - For check uniqueness of feature's name.
+
 
 ### Security Considerations
 
@@ -59,7 +62,7 @@ DegenToken is a decentralized ERC20 token with additional functionality for feat
 
 - **Minting Tokens**: The owner can mint new tokens to any address.
 - **Adding Features**: The owner can add new features with specific IDs, names, and prices.
-- **Buying Features**: Users can purchase features using their token balance.
+- **Redeem Features**: Users can purchase features using their token balance.
 - **Checking Purchases**: Anyone can check if a user has purchased a specific feature.
 
 ## Prerequisites
