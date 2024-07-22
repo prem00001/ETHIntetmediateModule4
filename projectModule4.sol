@@ -58,13 +58,18 @@ contract DegenToken is ERC20, Ownable, ERC20Burnable
         require(balanceOf(msg.sender) >= feature.price, "Insufficient balance");
 
         // Burn tokens from the user
-        _burn(msg.sender, feature.price);
+        burn(feature.price);
 
         // Mark the feature as redeemed by the user
         userFeatures[msg.sender][featureId] = true;
 
         // Emit the event
         emit FeatureRedeemed(msg.sender, featureId, feature.name);
+    }
+
+    // Explicitly added the burn function
+    function burn(uint256 amount) public override {
+        _burn(_msgSender(), amount);
     }
 
     // Check if a user has redeemed a feature
